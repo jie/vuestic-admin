@@ -2,11 +2,12 @@
   <va-navbar class="app-navbar">
     <header-selector slot="selector" :minimized.sync="minimizedProxy"/>
     <template slot="logo">
-      <va-icon-vuestic/>
+      <!-- <va-icon-vuestic/> -->
+      <explorium-logo :width="120" :height="40" title="Explorium Cloud" />
     </template>
     <template slot="center">
       <div class="row flex-nowrap align--center justify--space-between">
-        <span class="va-navbar__text no-wrap">
+        <!-- <span class="va-navbar__text no-wrap">
           {{$t('navbar.messageUs')}}&nbsp;
           <a
             href="mailto:hello@epicmax.co"
@@ -16,9 +17,9 @@
           >
             hello@epicmax.co
           </a>
-        </span>
+        </span> -->
         <div>
-          <va-button
+          <!-- <va-button
             href="https://github.com/epicmaxco/vuestic-admin"
             color="#000000"
             class="app-navbar__button text--bold"
@@ -26,14 +27,14 @@
             target="_blank"
           >
             {{$t('navbar.support')}}
-          </va-button>
+          </va-button> -->
         </div>
       </div>
     </template>
     <div class="app-navbar__actions row flex-nowrap align--center">
-      <color-dropdown class="va-navbar__item"/>
+      <!-- <color-dropdown class="va-navbar__item"/>
       <message-dropdown class="va-navbar__item"/>
-      <notification-dropdown class="va-navbar__item"/>
+      <notification-dropdown class="va-navbar__item"/> -->
       <!--<settings-dropdown-->
         <!--class="va-navbar__item"-->
         <!--:navbar-view.sync="navbarViewProxy"-->
@@ -56,7 +57,7 @@ import NotificationDropdown from './components/dropdowns/NotificationDropdown'
 import MessageDropdown from './components/dropdowns/MessageDropdown'
 import SettingsDropdown from './components/dropdowns/SettingsDropdown'
 import ColorDropdown from './components/dropdowns/ColorDropdown'
-
+import ExploriumLogo from '@/components/explorium/logo.vue'
 export default {
   name: 'app-navbar',
   components: {
@@ -68,6 +69,7 @@ export default {
     NotificationDropdown,
     LanguageDropdown,
     ProfileDropdown,
+    ExploriumLogo,
   },
   props: {
     minimized: {

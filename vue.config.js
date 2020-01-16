@@ -12,9 +12,7 @@ if (process.env.VUE_APP_BOOK) {
       },
     },
   }
-}
-
-if (!process.env.VUE_APP_BOOK) {
+} else {
   config = {
     lintOnSave: false,
     pages: {

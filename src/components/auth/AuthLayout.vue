@@ -2,7 +2,8 @@
 <div class="auth-layout row align-content--center">
   <div class="flex xs12 pa-3 flex-center">
     <router-link class="py-5 flex-center" to="/">
-      <va-icon-vuestic />
+      <!-- <va-icon-vuestic /> -->
+      <explorium-logo />
     </router-link>
   </div>
 
@@ -30,7 +31,7 @@
 
 <script>
 import VaIconVuestic from 'vuestic-ui/src/components/vuestic-components/va-icon/va-iconset/VaIconVuestic'
-
+import ExploriumLogo from '@/components/explorium/logo.vue'
 const tabs = [
   'login',
   'signup',
@@ -38,7 +39,7 @@ const tabs = [
 
 export default {
   name: 'AuthLayout',
-  components: { VaIconVuestic },
+  components: { VaIconVuestic, ExploriumLogo },
   data () {
     return {
       selectedTabIndex: 0,
