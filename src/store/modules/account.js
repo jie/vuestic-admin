@@ -1,10 +1,10 @@
-import Vue from 'vue'
+// import Vue from 'vue'
 import accountAPI from '@/api/account'
 
 // initial state
 const state = {
   sessionid: null,
-  loading: false,
+  isLoading: false,
   errMsg: '',
 }
 
@@ -13,15 +13,15 @@ const getters = {}
 
 // actions
 const actions = {
-  login: ({
+  login: async ({
     commit,
     state,
   }, params) => {
-    commit('startLoading')
+    commit('setLoading', true)
     accountAPI.login(params,
       async (response) => {
         console.log('state:', state)
-        commit('stopLoading')
+        commit('setLoading', false)
 
         if (response.data.code === '0') {
           commit('setSessionid', {
@@ -33,7 +33,7 @@ const actions = {
       },
       async (err) => {
         console.log('accountLoginError:', err)
-        commit('stopLoading')
+        commit('setLoading', false)
         commit('requestErr', err)
       }
     )
@@ -44,6 +44,15 @@ const actions = {
 const mutations = {
   setSessionid (state, payload) {
     state.sessionid = payload.sessionid
+  },
+  requestErr (state, err, expireSec = 3) {
+    state.errMsg = err
+    setTimeout(() => {
+      state.errMsg = ''
+    }, expireSec * 1000)
+  },
+  setLoading (state, isLoading) {
+    state.isLoading = isLoading
   },
 }
 

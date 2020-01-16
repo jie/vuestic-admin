@@ -47,6 +47,17 @@ if (process.env.VUE_APP_BOOK) {
         },
       },
     },
+    devServer: {
+      proxy: {
+        '/user_system': {
+          target: 'http://localhost:8085',
+          changeOrigin: true,
+          pathRewrite: {
+            '^/user_system': '/user_system',
+          },
+        },
+      },
+    },
   }
 }
 
