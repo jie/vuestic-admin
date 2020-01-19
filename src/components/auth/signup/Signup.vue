@@ -9,6 +9,11 @@
   />
 
   <va-input
+    v-model="name"
+    type="name"
+    :label="$t('auth.name')"
+  />
+  <va-input
     v-model="password"
     type="password"
     :label="$t('auth.password')"
@@ -34,38 +39,84 @@
   </div>
 
   <div class="d-flex justify--center mt-3">
-    <va-button type="submit" class="my-0">{{ $t('auth.sign_up') }}</va-button>
+    <va-button type="submit" class="my-0" :disabled="submitDisabled">{{ $t('auth.sign_up') }}</va-button>
   </div>
 </form>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'signup',
   data () {
     return {
       email: '',
+      name: '',
       password: '',
       agreedToTerms: false,
       emailErrors: [],
       passwordErrors: [],
       agreedToTermsErrors: [],
+      submitDisabled: false,
     }
   },
+  computed: mapState({
+    isLoading: state => state.account.isLoading,
+    errMsg: state => state.account.errMsg,
+    formReady () {
+      return !this.emailErrors.length && !this.passwordErrors.length
+    },
+  }),
+
   methods: {
-    onsubmit () {
+    async onsubmit () {
       this.emailErrors = this.email ? [] : ['Email is required']
       this.passwordErrors = this.password ? [] : ['Password is required']
       this.agreedToTermsErrors = this.agreedToTerms ? [] : ['You must agree to the terms of use to continue']
       if (!this.formReady) {
         return
       }
-      this.$router.push({ name: 'dashboard' })
-    },
-  },
-  computed: {
-    formReady () {
-      return !(this.emailErrors.length || this.passwordErrors.length || this.agreedToTermsErrors.length)
+
+      this.submitDisabled = true
+      this.emailErrors = this.email ? [] : ['Email is required']
+      this.passwordErrors = this.password ? [] : ['Password is required']
+      if (!this.formReady) {
+        this.submitDisabled = false
+        return
+      }
+      // this.$router.push({ name: "dashboard" });
+      this.showToast('loading...', {
+        icon: 'fa-circle-o-notch',
+        position: 'bottom-right',
+        duration: 20000,
+        fullWidth: false,
+      })
+      let result = await this.$store.dispatch('account/regist', {
+        password: this.password,
+        email: this.email,
+        name: this.name,
+      })
+      if (this.errMsg) {
+        this.$toasted.clear()
+        this.showToast(this.errMsg, {
+          icon: 'fa-warning',
+          position: 'bottom-right',
+          duration: 3000,
+          fullWidth: false,
+        })
+      } else {
+        this.$toasted.clear()
+        this.showToast(this.$t('auth.regist_email_send'), {
+          icon: 'lightbulb-o',
+          position: 'bottom-right',
+          duration: 3000,
+          fullWidth: false,
+        })
+      }
+
+      setTimeout(() => {
+        this.submitDisabled = false
+      }, 2000)
     },
   },
 }

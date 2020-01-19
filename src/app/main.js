@@ -27,11 +27,12 @@ Vue.use(ColorThemePlugin,
   {
     // Add or change theme colors here
     themes: {
+      primary: '#d51c20',
       // primary: '#f06595',
-      // blurple: '#7289DA',
+      blurple: '#7289DA',
+      secondary: '#E67774',
     },
   })
-
 router.beforeEach((to, from, next) => {
   store.commit('setLoading', true)
   next()

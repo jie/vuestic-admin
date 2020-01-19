@@ -50,10 +50,17 @@ if (process.env.VUE_APP_BOOK) {
     devServer: {
       proxy: {
         '/user_system': {
-          target: 'http://localhost:8085',
+          target: 'http://192.168.146.122',
           changeOrigin: true,
           pathRewrite: {
             '^/user_system': '/user_system',
+          },
+        },
+        '/open_wechat': {
+          target: 'http://192.168.146.122',
+          changeOrigin: true,
+          pathRewrite: {
+            '^/open_wechat': '/open_wechat',
           },
         },
       },

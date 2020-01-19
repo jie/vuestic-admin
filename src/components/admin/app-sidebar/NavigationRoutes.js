@@ -8,14 +8,34 @@ export const navigationRoutes = {
       name: 'dashboard',
       displayName: 'menu.dashboard',
       meta: {
-        iconClass: 'vuestic-iconset-dashboard',
+        iconClass: 'vuestic-iconset vuestic-iconset-dashboard',
       },
     },
+
+    {
+      name: 'applications',
+      displayName: 'menu.applications',
+      meta: {
+        iconClass: 'fa fa-cubes',
+      },
+      disabled: true,
+      children: [
+        {
+          name: 'wechat',
+          displayName: 'menu.wechat',
+        },
+        {
+          name: 'shop',
+          displayName: 'menu.shop',
+        },
+      ],
+    },
+
     {
       name: 'statistics',
       displayName: 'menu.statistics',
       meta: {
-        iconClass: 'vuestic-iconset-statistics',
+        iconClass: 'vuestic-iconset vuestic-iconset-statistics',
       },
       disabled: true,
       children: [
@@ -33,7 +53,7 @@ export const navigationRoutes = {
       name: 'forms',
       displayName: 'menu.forms',
       meta: {
-        iconClass: 'vuestic-iconset-forms',
+        iconClass: 'vuestic-iconset vuestic-iconset-forms',
       },
       disabled: true,
       children: [
@@ -51,7 +71,7 @@ export const navigationRoutes = {
       name: 'tables',
       displayName: 'menu.tables',
       meta: {
-        iconClass: 'vuestic-iconset-tables',
+        iconClass: 'vuestic-iconset vuestic-iconset-tables',
       },
       children: [
         {
@@ -68,7 +88,7 @@ export const navigationRoutes = {
       name: 'ui',
       displayName: 'menu.uiElements',
       meta: {
-        iconClass: 'vuestic-iconset-ui-elements',
+        iconClass: 'vuestic-iconset vuestic-iconset-ui-elements',
       },
       disabled: true,
       children: [
@@ -172,7 +192,7 @@ export const navigationRoutes = {
       name: 'maps',
       displayName: 'menu.maps',
       meta: {
-        iconClass: 'vuestic-iconset-maps',
+        iconClass: 'vuestic-iconset vuestic-iconset-maps',
       },
       disabled: true,
       children: [
@@ -202,7 +222,7 @@ export const navigationRoutes = {
       name: 'pages',
       displayName: 'menu.pages',
       meta: {
-        iconClass: 'vuestic-iconset-files',
+        iconClass: 'vuestic-iconset vuestic-iconset-files',
       },
       disabled: true,
       children: [

@@ -1,13 +1,15 @@
 {
   "auth": {
     "agree": "我同意",
+    "name": "姓名",
     "createAccount": "创建账号",
     "createNewAccount": "创建新账号",
     "email": "电子邮箱",
     "login": "登录",
     "password": "密码",
     "signUp": "注册",
-    "termsOfUse": "使用条款"
+    "termsOfUse": "使用条款",
+    "registEmailSend": "注册邮件已发出，请到邮箱查收" 
   },
   "buttons": {
     "advanced": "图标、组、下拉菜单",
@@ -173,7 +175,10 @@
     "treeView": "树视图",
     "dateTimePickers": "日期时间选择器",
     "fileUpload": "文件上传",
-    "chat": "聊天"
+    "chat": "聊天",
+    "applications": "应用管理",
+    "wechat": "微信",
+    "shop": "店铺"
   },
   "messages": {
     "all": "查看全部消息",

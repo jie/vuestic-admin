@@ -1,6 +1,7 @@
 {
   "auth": {
     "agree": "I agree to",
+    "name": "Name",
     "createAccount": "Create account",
     "createNewAccount": "Create New Account",
     "email": "Email",
@@ -10,7 +11,8 @@
     "sign_up": "Sign Up",
     "keep_logged_in": "Keep me logged in",
     "termsOfUse": "Terms of Use.",
-    "reset_password": "Reset password"
+    "reset_password": "Reset password",
+    "registEmailSend": "Regstration email send, please check your email" 
   },
   "404": {
     "title": "This page’s gone fishing.",
@@ -313,7 +315,10 @@
     "spacing": "Spacing",
     "sliders": "Sliders",
     "popovers": "Popovers",
-    "chat": "Chat"
+    "chat": "Chat",
+    "applications": "Applications",
+    "wechat": "Wechat",
+    "shop": "Shop"
   },
   "messages": {
     "all": "See all messages",

@@ -18,25 +18,43 @@ const actions = {
     state,
   }, params) => {
     commit('setLoading', true)
-    accountAPI.login(params,
-      async (response) => {
-        console.log('state:', state)
-        commit('setLoading', false)
-
-        if (response.data.code === '0') {
-          commit('setSessionid', {
-            sessoinid: response.data.data.sessionid,
-          })
-        } else {
-          commit('requestErr', response.data.message)
-        }
-      },
-      async (err) => {
-        console.log('accountLoginError:', err)
-        commit('setLoading', false)
-        commit('requestErr', err)
-      }
-    )
+    let result = await accountAPI.login(params)
+    commit('setLoading', false)
+    if (!result) {
+      commit('setError', 'system_error')
+    }
+    if (result.data.code === '0') {
+      commit('setSessionid', {
+        sessoinid: result.data.data.sessionid,
+      })
+    } else {
+      commit('setError', {
+        errMsg: result.data.message,
+      })
+    }
+    return result
+  },
+  regist: async ({
+    commit,
+    state,
+  }, params) => {
+    commit('setLoading', true)
+    let result = await accountAPI.regist(params)
+    commit('setLoading', false)
+    if (!result) {
+      commit('setError', 'system_error')
+    }
+    if (result.data.code !== '0') {
+      commit('setError', {
+        errMsg: result.data.message,
+      })
+    }
+    return result
+  },
+  clearError: async () => {
+    commit('setError', {
+      errMsg: result.data.message,
+    })
   },
 }
 
@@ -45,11 +63,9 @@ const mutations = {
   setSessionid (state, payload) {
     state.sessionid = payload.sessionid
   },
-  requestErr (state, err, expireSec = 3) {
-    state.errMsg = err
-    setTimeout(() => {
-      state.errMsg = ''
-    }, expireSec * 1000)
+  setError (state, payload) {
+    console.log('setError:', payload)
+    state.errMsg = payload.errMsg
   },
   setLoading (state, isLoading) {
     state.isLoading = isLoading

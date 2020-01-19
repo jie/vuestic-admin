@@ -60,7 +60,7 @@
 
     <div class="flex xs12 md6 xl3">
       <va-card
-        image="https://i.imgur.com/qSykGko.jpg"
+        image="http://qnstatic.explorium.cn/funggroup/cosmos_bg.jpeg"
         square
         titleOnImage
       >

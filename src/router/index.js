@@ -86,6 +86,29 @@ export default new Router({
           default: true,
         },
         {
+          name: 'applications',
+          path: 'applications',
+          component: EmptyParentComponent,
+          children: [
+            {
+              name: 'wechat',
+              path: 'wechat',
+              component: () => import('../components/applications/wechat/Wechat.vue'),
+              meta: {
+                wikiLink: 'https://github.com/epicmaxco/vuestic-admin/wiki/Charts',
+              },
+            },
+            {
+              name: 'shop',
+              path: 'shop',
+              component: () => import('../components/applications/shop/Shop.vue'),
+              meta: {
+                wikiLink: 'https://github.com/epicmaxco/vuestic-admin/wiki/Progress-Bars',
+              },
+            },
+          ],
+        },
+        {
           name: 'statistics',
           path: 'statistics',
           component: EmptyParentComponent,

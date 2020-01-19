@@ -2,3 +2,26 @@
 @import "~vuestic-ui/src/components/vuestic-sass/global/normalize.scss";
 @import "~vuestic-ui/src/components/vuestic-sass/vuestic-styles";
 @import './icons/icons.scss';
+
+
+
+@keyframes loadingSpin {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  20% {
+    transform: rotate(72deg) scale(1);
+  }
+  40% {
+    transform: rotate(144deg) scale(1);
+  }
+  60% {
+    transform: rotate(216deg) scale(1);
+  }
+  80% {
+    transform: rotate(288deg) scale(1);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}

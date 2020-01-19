@@ -25,7 +25,7 @@
     </div>
 
     <div class="d-flex justify--center mt-3">
-      <va-button type="submit" class="my-0">{{ $t('auth.login') }}</va-button>
+      <va-button type="submit" class="my-0" :disabled="submitDisabled">{{ $t('auth.login') }}</va-button>
     </div>
   </form>
 </template>
@@ -34,8 +34,7 @@
 import { mapState } from 'vuex'
 export default {
   name: 'login',
-  components: {
-  },
+  components: {},
   data () {
     return {
       email: '',
@@ -43,11 +42,13 @@ export default {
       keepLoggedIn: false,
       emailErrors: [],
       passwordErrors: [],
+      submitDisabled: false,
     }
   },
   computed: mapState({
-    sessionid: state => state.sessionid,
-    isLoading: state => state.isLoading,
+    sessionid: state => state.account.sessionid,
+    isLoading: state => state.account.isLoading,
+    errMsg: state => state.account.errMsg,
     formReady () {
       return !this.emailErrors.length && !this.passwordErrors.length
     },
@@ -56,25 +57,44 @@ export default {
 
   methods: {
     async onsubmit () {
+      this.submitDisabled = true
       this.emailErrors = this.email ? [] : ['Email is required']
       this.passwordErrors = this.password ? [] : ['Password is required']
       if (!this.formReady) {
+        this.submitDisabled = false
         return
       }
       // this.$router.push({ name: "dashboard" });
       this.showToast('loading...', {
         icon: 'fa-circle-o-notch',
         position: 'bottom-right',
-        duration: 'infinity',
+        duration: 20000,
         fullWidth: false,
       })
-      await this.$store.dispatch('account/login', {
+      let result = await this.$store.dispatch('account/login', {
         password: this.password,
         email: this.email,
       })
-      setTimeout(() => {
+      if (this.errMsg) {
         this.$toasted.clear()
-      }, 3000)
+        this.showToast(this.errMsg, {
+          icon: 'fa-warning',
+          position: 'bottom-right',
+          duration: 3000,
+          fullWidth: false,
+        })
+      } else {
+        this.$toasted.clear()
+        this.showToast('login success', {
+          icon: 'lightbulb-o',
+          position: 'bottom-right',
+          duration: 3000,
+          fullWidth: false,
+        })
+      }
+      setTimeout(() => {
+        this.submitDisabled = false
+      }, 2000)
     },
   },
 }
@@ -82,26 +102,7 @@ export default {
 
 <style>
 .fa-circle-o-notch {
-  animation: spin 1s linear infinite;
+  animation: loadingSpin 1s linear infinite;
 }
-@keyframes spin {
-    0% {
-        transform: rotate(0deg) scale(1);
-    }
-    20% {
-        transform: rotate(72deg) scale(1);
-    }
-    40% {
-        transform: rotate(144deg) scale(1);
-    }
-    60% {
-        transform: rotate(216deg) scale(1);
-    }
-    80% {
-        transform: rotate(288deg) scale(1);
-    }
-    100% {
-        transform: rotate(360deg) scale(1);
-    }
-}
+
 </style>
