@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import VuexI18n from 'vuex-i18n' // load vuex i18n module
 import app from './modules/app'
 import account from './modules/account'
+import wechat from './modules/wechat'
 
 import * as getters from './getters'
 
@@ -14,9 +15,10 @@ const store = new Vuex.Store({
   modules: {
     app,
     account,
+    wechat
   },
   state: {},
-  mutations: {},
+  mutations: {}
 })
 
 Vue.use(VuexI18n.plugin, store)

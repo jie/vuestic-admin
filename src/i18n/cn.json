@@ -322,5 +322,20 @@
       "action1": "行为 1",
       "action2": "行为 2"
     }
+  },
+  "wechat": {
+    "name": "名称",
+    "wechatid": "Wechat ID",
+    "appid": "App ID",
+    "my_wechat_apps": "我的微信应用",
+    "create_my_first_wechat_app": "创建我的第一个微信应用",
+    "create_wechat_app": "创建应用",
+    "edit_wechat_app": "编辑应用",
+    "appsecret": "App Secret",
+    "echo_token": "Echo Token",
+    "echo_aes_key": "EncodingAESKey",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "confirm_to_delete_app": "请确定是否删除微信应用:{name}"
   }
 }

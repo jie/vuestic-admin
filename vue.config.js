@@ -8,9 +8,9 @@ if (process.env.VUE_APP_BOOK) {
     pages: {
       index: {
         entry: 'src/vue-book/book-main.js',
-        template: 'public/index.html',
-      },
-    },
+        template: 'public/index.html'
+      }
+    }
   }
 } else {
   config = {
@@ -28,43 +28,43 @@ if (process.env.VUE_APP_BOOK) {
         title: 'Vuestic Admin',
         // chunks to include on this page, by default includes
         // extracted common chunks and vendor chunks.
-        chunks: ['chunk-vendors', 'chunk-common', 'index'],
-      },
+        chunks: ['chunk-vendors', 'chunk-common', 'index']
+      }
     },
     configureWebpack: {
       resolve: {
         alias: {
           'vue$': 'vue/dist/vue.esm.js',
-          '@': path.resolve('src'),
-        },
-      },
+          '@': path.resolve('src')
+        }
+      }
     },
     css: {
       loaderOptions: {
         sass: {
           // Preload vuestic-ui variables and mixins for every component
-          data: `@import "~vuestic-ui/src/components/vuestic-sass/resources/resources.scss";`,
-        },
-      },
+          data: `@import "~vuestic-ui/src/components/vuestic-sass/resources/resources.scss";`
+        }
+      }
     },
     devServer: {
       proxy: {
         '/user_system': {
-          target: 'http://192.168.146.122',
+          target: 'http://beta.lab.explorium.cn',
           changeOrigin: true,
           pathRewrite: {
-            '^/user_system': '/user_system',
-          },
+            '^/user_system': '/user_system'
+          }
         },
         '/open_wechat': {
-          target: 'http://192.168.146.122',
+          target: 'http://beta.funggroup.explorium.cn',
           changeOrigin: true,
           pathRewrite: {
-            '^/open_wechat': '/open_wechat',
-          },
-        },
-      },
-    },
+            '^/open_wechat': '/open_wechat'
+          }
+        }
+      }
+    }
   }
 }
 

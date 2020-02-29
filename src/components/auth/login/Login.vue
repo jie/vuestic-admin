@@ -42,7 +42,7 @@ export default {
       keepLoggedIn: false,
       emailErrors: [],
       passwordErrors: [],
-      submitDisabled: false,
+      submitDisabled: false
     }
   },
   computed: mapState({
@@ -51,7 +51,7 @@ export default {
     errMsg: state => state.account.errMsg,
     formReady () {
       return !this.emailErrors.length && !this.passwordErrors.length
-    },
+    }
   }),
   created () {},
 
@@ -69,19 +69,21 @@ export default {
         icon: 'fa-circle-o-notch',
         position: 'bottom-right',
         duration: 20000,
-        fullWidth: false,
+        fullWidth: false
       })
       let result = await this.$store.dispatch('account/login', {
         password: this.password,
-        email: this.email,
+        email: this.email
       })
+      console.log('result:', result)
+      console.log('errMsg:', this.errMsg)
       if (this.errMsg) {
         this.$toasted.clear()
         this.showToast(this.errMsg, {
           icon: 'fa-warning',
           position: 'bottom-right',
           duration: 3000,
-          fullWidth: false,
+          fullWidth: false
         })
       } else {
         this.$toasted.clear()
@@ -89,14 +91,18 @@ export default {
           icon: 'lightbulb-o',
           position: 'bottom-right',
           duration: 3000,
-          fullWidth: false,
+          fullWidth: false
+        })
+        await this.$store.dispatch('app/getSession')
+        this.$router.push({
+          name: 'dashboard'
         })
       }
       setTimeout(() => {
         this.submitDisabled = false
       }, 2000)
-    },
-  },
+    }
+  }
 }
 </script>
 

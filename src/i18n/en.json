@@ -501,6 +501,21 @@
       "secondaryAction": "Secondary action",
       "action1": "Action 1",
       "action2": "Action 2"
+    },
+    "wechat": {
+      "name": "Name",
+      "wechatid": "Wechat ID",
+      "appid": "App ID",
+      "my_wechat_apps": "My wechat apps",
+      "create_my_first_wechat_app": "Create my first wechat app",
+      "create_wechat_app": "Create App",
+      "edit_wechat_app": "Edit App",
+      "appsecret": "App Secret",
+      "echo_token": "Echo Token",
+      "echo_aes_key": "EncodingAESKey",
+      "submit": "Submit",
+      "cancel": "Cancel",
+      "confirm_to_delete_app": "Confirm wether to delete wechat app:{name}"
     }
   }
 }

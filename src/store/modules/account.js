@@ -1,11 +1,11 @@
 // import Vue from 'vue'
 import accountAPI from '@/api/account'
-
+const sessionKey = process.env.VUE_APP_SESSIONID_KEY
 // initial state
 const state = {
   sessionid: null,
   isLoading: false,
-  errMsg: '',
+  errMsg: null
 }
 
 // getters
@@ -15,61 +15,66 @@ const getters = {}
 const actions = {
   login: async ({
     commit,
-    state,
+    state
   }, params) => {
     commit('setLoading', true)
     let result = await accountAPI.login(params)
     commit('setLoading', false)
     if (!result) {
-      commit('setError', 'system_error')
+      commit('setError', { errMsg: 'system_error' })
+      return result
     }
-    if (result.data.code === '0') {
+    if (result.data.code === '0' && result.data.data.sessionid) {
       commit('setSessionid', {
-        sessoinid: result.data.data.sessionid,
+        sessionid: result.data.data.sessionid
       })
     } else {
       commit('setError', {
-        errMsg: result.data.message,
+        errMsg: result.data.message
       })
     }
     return result
   },
   regist: async ({
     commit,
-    state,
+    state
   }, params) => {
     commit('setLoading', true)
     let result = await accountAPI.regist(params)
     commit('setLoading', false)
     if (!result) {
-      commit('setError', 'system_error')
+      commit('setError', { errMsg: 'system_error' })
+      return result
     }
     if (result.data.code !== '0') {
       commit('setError', {
-        errMsg: result.data.message,
+        errMsg: result.data.message
       })
     }
     return result
   },
-  clearError: async () => {
+  clearError: async ({
+    commit,
+    state
+  }, params) => {
     commit('setError', {
-      errMsg: result.data.message,
+      errMsg: ''
     })
-  },
+  }
 }
 
 // mutationsg
 const mutations = {
   setSessionid (state, payload) {
     state.sessionid = payload.sessionid
+    localStorage.setItem(sessionKey, payload.sessionid)
   },
   setError (state, payload) {
-    console.log('setError:', payload)
     state.errMsg = payload.errMsg
   },
   setLoading (state, isLoading) {
     state.isLoading = isLoading
-  },
+  }
 }
 
 export default {
@@ -77,5 +82,5 @@ export default {
   state,
   getters,
   actions,
-  mutations,
+  mutations
 }

@@ -1,6 +1,8 @@
+const sessionKey = process.env.VUE_APP_SESSIONID_KEY
+
 const state = {
   sidebar: {
-    opened: false,
+    opened: false
   },
   config: {
     palette: {
@@ -13,23 +15,46 @@ const state = {
       black: '#000',
       fontColor: '#34495e',
       transparent: 'transparent',
-      lighterGray: '#ddd',
-    },
+      lighterGray: '#ddd'
+    }
   },
   isLoading: true,
+  sessionid: null
 }
 
 const mutations = {
   setLoading (state, isLoading) {
     state.isLoading = isLoading
   },
+  setSessionid (state, payload) {
+    state.sessionid = payload.sessionid
+  }
 }
 
 const actions = {
+  getSession: ({
+    commit,
+    state
+  }, params) => {
+    let sessionid = localStorage.getItem(sessionKey)
+    if (sessionid) {
+      commit('setSessionid', {
+        sessionid: sessionid
+      })
+    }
+    return sessionid
+  }
+}
+
+const getters = {
+  sessionid: state => {
+    return localStorage.getItem(sessionKey)
+  }
 }
 
 export default {
   state,
+  getters,
   mutations,
-  actions,
+  actions
 }
